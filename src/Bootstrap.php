@@ -28,12 +28,16 @@ require __DIR__ . '/../vendor/autoload.php';
     }
     $woops->register();
 
+    /**
+     * Create a dependency injector
+     */
+    $injector = include('Dependencies.php');
 
     /**
      * Create request and response components
      */
-    $request = new \Http\HttpRequest($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
-    $response = new \Http\HttpResponse;
+    $request = $injector->make('Http\HttpRequest');
+    $response = $injector->make('Http\HttpResponse');
 
     $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
         $routes = include('Routes.php');
@@ -57,10 +61,11 @@ require __DIR__ . '/../vendor/autoload.php';
             $method = $routeInfo[1][1];
             $vars = $routeInfo[2];
 
-            $class = new $className($response);
+            $class = $injector->make($className);
             $class->$method($vars);
             break;
     }
+
     /**
      * Send the response
      */

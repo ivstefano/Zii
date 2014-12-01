@@ -1,0 +1,21 @@
+{
+    "name": "zigivicious/Zii",
+    "description": "Basic project setup",
+    "keywords": ["zii", "project", "setup"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivo Stefanov",
+            "email": "zigivicious@gmail.com",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zii\\": "src/"
+        }
+    }
+}
